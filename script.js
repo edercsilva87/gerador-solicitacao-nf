@@ -51,44 +51,44 @@ const modalValorUnitarioInput = document.getElementById("modal-valor-unitario");
 
 const baseLocationCatalog = {
   sapReferences: [
-    { codigo: "BR01", descricao: "MATRIZ" },
-    { codigo: "BR02", descricao: "BARUERI" },
-    { codigo: "BR03", descricao: "RECIFE" },
-    { codigo: "BR10", descricao: "CURITIBA" },
-    { codigo: "BR11", descricao: "JOINVILLE" },
-    { codigo: "BR12", descricao: "PORTO ALEGRE" },
+    { codigo: "CD01", descricao: "SEDE CENTRAL" },
+    { codigo: "CD02", descricao: "FILIAL NORTE" },
+    { codigo: "CD03", descricao: "FILIAL SUL" },
+    { codigo: "CD10", descricao: "DEPOSITO LESTE" },
+    { codigo: "CD11", descricao: "DEPOSITO OESTE" },
+    { codigo: "CD12", descricao: "CENTRO DISTRIBUICAO" },
   ],
   transportadora: [
-    { codigo: "3001671", descricao: "BRASPRESS" },
-    { codigo: "3001820", descricao: "JADLOG" },
-    { codigo: "3001900", descricao: "TOTAL EXPRESS" },
+    { codigo: "4001100", descricao: "TRANSPORTADORA ALPHA" },
+    { codigo: "4001200", descricao: "TRANSPORTADORA BETA" },
+    { codigo: "4001300", descricao: "TRANSPORTADORA GAMMA" },
   ],
 };
 
 const baseProductCatalog = {
-  "831811": {
-    descricaoProduto: "SmartPhone Samsung",
-    valorUnitario: "1900",
+  "100001": {
+    descricaoProduto: "Smartphone Modelo X",
+    valorUnitario: "2000",
   },
-  "832072": {
-    descricaoProduto: "Monitor DELL 2208WFPt",
-    valorUnitario: "5900",
+  "100002": {
+    descricaoProduto: "Monitor 24 polegadas",
+    valorUnitario: "1500",
   },
-  "833834": {
-    descricaoProduto: "Lenovo ThinkPad E14",
-    valorUnitario: "9000",
+  "100003": {
+    descricaoProduto: "Notebook Profissional",
+    valorUnitario: "5500",
   },
-  "834426": {
-    descricaoProduto: "Notebook Dell Latitude",
-    valorUnitario: "9000",
+  "100004": {
+    descricaoProduto: "Teclado e Mouse sem fio",
+    valorUnitario: "350",
   },
-  "836550": {
-    descricaoProduto: "Impressora SL-M4080FX",
-    valorUnitario: "6000",
+  "100005": {
+    descricaoProduto: "Impressora Multifuncional",
+    valorUnitario: "1800",
   },
-  "839058": {
-    descricaoProduto: "codigo para chip",
-    valorUnitario: "20",
+  "100006": {
+    descricaoProduto: "Headset USB",
+    valorUnitario: "180",
   },
 };
 
