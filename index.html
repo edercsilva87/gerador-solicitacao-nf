@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitação de NF - SM Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Solicitacao de Nota Fiscal</p>
+        <h1>Solicitação de NF - SM Brasil</h1>
+        <p class="subtitle">
+          Preencha os dados abaixo para montar a solicitacao em um formato organizado,
+          pronto para conferência e envio por email.
+        </p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="panel form-panel">
+        <div class="section-header top-section-header">
+          <h2>Dados da solicitacao</h2>
+          <div class="actions-inline">
+            <button id="open-sap-modal" class="ghost-button" type="button">Cadastrar endereços</button>
+            <button id="open-transportadora-modal" class="ghost-button" type="button">Cadastrar transportadora</button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Origem (cod. SAP)</span>
+            <input id="origem" type="text" list="origens-list" placeholder="Ex: BR01 - MATRIZ">
+          </label>
+
+          <label>
+            <span>Destino (cod. SAP)</span>
+            <input id="destino" type="text" list="destinos-list" placeholder="Ex: BR10 - CURITIBA">
+          </label>
+
+          <label>
+            <span>Total de volumes</span>
+            <input id="volumes" type="number" min="1" value="1">
+          </label>
+
+          <label>
+            <span>Peso Total</span>
+            <input id="peso-total-geral" type="text" value="0 g" readonly>
+          </label>
+
+          <label class="full-width-field">
+            <span>Transportadora (cod. SAP)</span>
+            <input id="transportadora" type="text" list="transportadoras-list" placeholder="Ex: 3001671 - BRASPRESS">
+          </label>
+
+          <label class="full-width-field">
+            <span>Emails de Destino</span>
+            <input id="email-destinatario" type="text" placeholder="Ex: fiscal@grupo-sm.com; nf@grupo-sm.com">
+          </label>
+        </div>
+
+        <p class="field-tip">
+          Esses campos funcionam com lista pronta. Voce pode buscar por codigo ou nome e selecionar a opcao sugerida.
+        </p>
+
+        <div class="section-header">
+          <h3>Produtos</h3>
+          <div class="actions-inline">
+            <button id="open-product-modal" class="ghost-button" type="button">Cadastrar Produto</button>
+            <button id="add-product" class="secondary-button" type="button">Adicionar Produto</button>
+          </div>
+        </div>
+
+        <div id="products-list" class="products-list"></div>
+      </div>
+
+      <div class="panel preview-panel">
+        <div class="preview-header">
+          <div>
+            <p class="eyebrow">Preview</p>
+            <h2>Prévia de email</h2>
+          </div>
+          <div class="actions-inline">
+            <button id="send-email" class="primary-button" type="button">Gerar email</button>
+          </div>
+        </div>
+
+        <label class="preview-subject">
+          <span>Assunto do email</span>
+          <input id="assunto-email" type="text" value="Solicitação: Emissão de NF - SP > Curitiba">
+        </label>
+
+        <div id="request-preview" class="request-preview"></div>
+      </div>
+    </section>
+  </main>
+
+  <datalist id="origens-list"></datalist>
+  <datalist id="destinos-list"></datalist>
+  <datalist id="transportadoras-list"></datalist>
+  <datalist id="produtos-sap-list"></datalist>
+
+  <dialog id="sap-modal" class="modal">
+    <form id="sap-form" class="modal-card" method="dialog">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Cadastro SAP</p>
+          <h3>Novo codigo para origem e destino</h3>
+        </div>
+        <button id="close-sap-modal" class="icon-button" type="button" aria-label="Fechar">×</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>Codigo SAP</span>
+          <input id="modal-sap-codigo" name="codigo" type="text" required placeholder="Ex: BR15">
+        </label>
+
+        <label>
+          <span>Descricao</span>
+          <input id="modal-sap-descricao" name="descricao" type="text" required placeholder="Ex: CAMPINAS">
+        </label>
+      </div>
+
+      <p id="sap-modal-feedback" class="modal-feedback" aria-live="polite"></p>
+
+      <section class="sap-list-section">
+        <div class="section-header compact-section-header">
+          <h4>Codigos cadastrados</h4>
+        </div>
+        <div id="sap-registered-list" class="sap-registered-list"></div>
+      </section>
+
+      <div class="modal-actions">
+        <button class="ghost-button" type="button" id="cancel-sap-modal">Cancelar</button>
+        <button class="primary-button" type="submit">Salvar codigo</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="transportadora-modal" class="modal">
+    <form id="transportadora-form" class="modal-card" method="dialog">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Cadastro Transportadora</p>
+          <h3>Nova transportadora</h3>
+        </div>
+        <button id="close-transportadora-modal" class="icon-button" type="button" aria-label="Fechar">×</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>Codigo SAP</span>
+          <input id="modal-transportadora-codigo" name="codigo" type="text" required placeholder="Ex: 3002001">
+        </label>
+
+        <label>
+          <span>Descricao</span>
+          <input id="modal-transportadora-descricao" name="descricao" type="text" required placeholder="Ex: TRANSPORTADORA EXEMPLO">
+        </label>
+      </div>
+
+      <p id="transportadora-modal-feedback" class="modal-feedback" aria-live="polite"></p>
+
+      <section class="sap-list-section">
+        <div class="section-header compact-section-header">
+          <h4>Transportadoras cadastradas</h4>
+        </div>
+        <div id="transportadora-registered-list" class="sap-registered-list"></div>
+      </section>
+
+      <div class="modal-actions">
+        <button class="ghost-button" type="button" id="cancel-transportadora-modal">Cancelar</button>
+        <button class="primary-button" type="submit">Salvar transportadora</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="product-modal" class="modal">
+    <form id="product-form" class="modal-card" method="dialog">
+      <input id="modal-product-original-code" name="originalCodigoSap" type="hidden">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Catalogo SAP</p>
+          <h3>Cadastrar novo produto</h3>
+        </div>
+        <button id="close-product-modal" class="icon-button" type="button" aria-label="Fechar">×</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>Codigo SAP</span>
+          <input id="modal-codigo-sap" name="codigoSap" type="text" required placeholder="Ex: 834001">
+        </label>
+
+        <label>
+          <span>Descricao do produto</span>
+          <input id="modal-descricao-produto" name="descricaoProduto" type="text" required placeholder="Ex: Monitor Dell 24">
+        </label>
+
+        <label>
+          <span>Valor unitario (R$)</span>
+          <input id="modal-valor-unitario" name="valorUnitario" type="text" inputmode="decimal" required placeholder="Ex: 1.500,00">
+        </label>
+      </div>
+
+      <p id="modal-feedback" class="modal-feedback" aria-live="polite"></p>
+
+      <section class="sap-list-section">
+        <div class="section-header compact-section-header">
+          <h4>Produtos cadastrados</h4>
+        </div>
+        <div id="product-registered-list" class="sap-registered-list"></div>
+      </section>
+
+      <div class="modal-actions">
+        <button class="ghost-button" type="button" id="cancel-product-modal">Cancelar</button>
+        <button class="primary-button" type="submit">Salvar produto</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="product-template">
+    <article class="product-card">
+      <div class="product-card-header">
+        <h4 class="product-title">Produto</h4>
+        <button class="danger-button remove-product" type="button">Remover</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>Produto (cod. SAP)</span>
+          <input data-field="codigoSap" type="text" list="produtos-sap-list" placeholder="Ex: 831811">
+        </label>
+
+        <label>
+          <span>Descricao do produto</span>
+          <input data-field="descricaoProduto" type="text" placeholder="Preenchido automaticamente" readonly>
+        </label>
+
+        <label>
+          <span>Quantidade</span>
+          <input data-field="quantidade" type="number" min="1" value="1">
+        </label>
+
+        <label>
+          <span>Valor unitario (R$)</span>
+          <input data-field="valorUnitario" type="text" placeholder="Preenchido automaticamente" readonly>
+        </label>
+
+        <label>
+          <span>Peso</span>
+          <input data-field="pesoTotal" type="text" placeholder="Ex: 0.5 g">
+        </label>
+
+        <label>
+          <span>Codigo patrimonio</span>
+          <input data-field="codigoPatrimonio" type="text" placeholder="Ex: Sem patrimonio">
+        </label>
+      </div>
+
+      <p class="product-help" data-role="product-status">
+        Digite o codigo SAP para preencher descricao e valor automaticamente.
+      </p>
+      <p class="product-help" data-role="weight-status"></p>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
