@@ -1578,7 +1578,8 @@ function buildEmailBody() {
     lines.push("");
   });
 
-  lines.push("Observacao: o corpo formatado em tabela foi copiado da pagina para voce colar no email.");
+  // Nota: o negrito e italico aparecem corretamente no email HTML gerado pelo botao Gerar email
+
 
   return lines.join("\n");
 }
