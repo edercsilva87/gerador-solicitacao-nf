@@ -476,8 +476,8 @@ function buildEmailIntroHtml() {
       <p>Tudo bem?</p>
       <p style="margin-top:18px;">
         Por favor poderiam emitir uma NF para que possamos transportar o material,
-        que esta em <strong><em>${escapeHtml(summaryFields.origem.value || "-")}</em></strong>
-        para <strong><em>${escapeHtml(summaryFields.destino.value || "-")}</em></strong>, sera
+        que esta em <strong><em>${escapeHtml(extrairCidade(summaryFields.origem.value) || "-")}</em></strong>
+        para <strong><em>${escapeHtml(extrairCidade(summaryFields.destino.value) || "-")}</em></strong>, sera
         <strong><em>${escapeHtml(formatQuantity(summaryFields.volumes.value || "0"))} volume.</em></strong>
       </p>
       <p style="margin-top:18px;"><strong><em>Segue dados:</em></strong></p>
@@ -490,7 +490,7 @@ function buildEmailIntroText() {
     "Prezados,",
     "Tudo bem?",
     "",
-    `Por favor poderiam emitir uma NF para que possamos transportar o material, que esta em ${summaryFields.origem.value || "-"} para ${summaryFields.destino.value || "-"}, sera ${formatQuantity(summaryFields.volumes.value || "0")} volume.`,
+    `Por favor poderiam emitir uma NF para que possamos transportar o material, que esta em ${extrairCidade(summaryFields.origem.value) || "-"} para ${extrairCidade(summaryFields.destino.value) || "-"}, sera ${formatQuantity(summaryFields.volumes.value || "0")} volume.`,
     "",
     "Segue dados:",
     "",
@@ -634,8 +634,8 @@ function buildEmailHtmlBody() {
       <p style="margin:0;">Tudo bem?</p>
       <p style="margin:18px 0 0 0;">
         Por favor poderiam emitir uma NF para que possamos transportar o material,
-        que esta em <strong><em>${escapeHtml(summaryFields.origem.value || "-")}</em></strong>
-        para <strong><em>${escapeHtml(summaryFields.destino.value || "-")}</em></strong>, sera
+        que esta em <strong><em>${escapeHtml(extrairCidade(summaryFields.origem.value) || "-")}</em></strong>
+        para <strong><em>${escapeHtml(extrairCidade(summaryFields.destino.value) || "-")}</em></strong>, sera
         <strong><em>${escapeHtml(formatQuantity(summaryFields.volumes.value || "0"))} volume.</em></strong>
       </p>
       <p style="margin:18px 0 0 0;"><strong><em>Segue dados:</em></strong></p>
